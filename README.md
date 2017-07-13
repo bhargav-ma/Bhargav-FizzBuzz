@@ -8,4 +8,4 @@ About the Solution:
 It contains 2 projects. One with FizzBuzz logic and the other has unittests covering all scenarios.
 
 Features:
-The Fizz and Buzz logic is provided from App.config. You can do enhancements through App.comfig.
+The Fizz and Buzz logic is provided from App.config. You can do enhancements through App.comfig in future.
