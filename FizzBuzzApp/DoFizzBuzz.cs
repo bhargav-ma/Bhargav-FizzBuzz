@@ -1,5 +1,5 @@
-﻿using System;
-using System.Configuration;
+using System;
+using System.Collections.Generic;
 
 namespace FizzBuzzApp
 {
@@ -20,15 +20,15 @@ namespace FizzBuzzApp
                 {
                     if (string.IsNullOrEmpty(strInput))
                     {
-                        Console.WriteLine(ConfigurationManager.AppSettings["strEmpty"]);
+                        Console.WriteLine("Empty Input is Invalid.Please enter a valid number: ");
                     }
                     else if (strInput == "0")
                     {
-                        Console.WriteLine(ConfigurationManager.AppSettings["strZero"]);
+                        Console.WriteLine("Zero Input is Invalid. Please enter a valid number :");
                     }
                     else
                     {
-                        Console.WriteLine(ConfigurationManager.AppSettings["strInvalid"], strInput);
+                        Console.WriteLine("Entered Input {0} is Invalid. Please enter a valid number :",strInput);
                     }
                     strInput = Console.ReadLine();
                 }
@@ -51,15 +51,22 @@ namespace FizzBuzzApp
                 string strContinue = string.Empty;
                 do
                 {
-                    Console.WriteLine(ConfigurationManager.AppSettings["strInput"]);
+                    Console.WriteLine("Please enter a valid non-zero number to start the FizzBuzz :");
                     double input = ValidateInput(Console.ReadLine());
 
                     Console.WriteLine("FizzBuzz Completed with the Result --> " + GetFizzBuzzValue(input));
                     Console.WriteLine("Do you want to continue. Enter Y or N ");
                     strContinue = Console.ReadLine();
-                    Console.WriteLine("Thank you for using FizzBizz..");
-                    Console.WriteLine();
+
+                    //This will execute only when the input is neither "Y" or "N"
+                    while (strContinue.ToUpper() != "Y" && strContinue.ToUpper() != "N")
+                    {
+                        Console.WriteLine("Please enter either Y or N : ");
+                        strContinue = Console.ReadLine();
+                    }
+                    Console.WriteLine("-------------------------------------");
                 } while (strContinue.ToUpper() == "Y");
+                Console.WriteLine("Thank you for using FizzBizz App..");
             }
             catch (Exception ex)
             {
@@ -68,28 +75,31 @@ namespace FizzBuzzApp
         }
 
         /// <summary>
-        /// This Method will Get the Fizz or Buzz value for the input
+        /// This Method will Get the Fizz or Buzz value for the validated input
         /// </summary>
         /// <param name="input"></param>
         /// <returns>string</returns>
         public static string GetFizzBuzzValue(double input)
         {
+            int fizzInput = 3;
+            int BuzzInput = 5;
+            Dictionary<int, string> Dict = new Dictionary<int, string>();
+
+            Dict.Add(fizzInput, "Fizz");
+            Dict.Add(BuzzInput, "Buzz");
             try
             {
-                int fizzValue = Convert.ToInt32(ConfigurationManager.AppSettings["fizzInput"]);
-                int BuzzValue = Convert.ToInt32(ConfigurationManager.AppSettings["BuzzInput"]);
-
-                if (input % fizzValue == 0 && input % BuzzValue == 0)
+                if (input % fizzInput == 0 && input % BuzzInput == 0)
                 {
-                    return ConfigurationManager.AppSettings["fizzValue"] + ConfigurationManager.AppSettings["BuzzValue"];
+                    return Dict[fizzInput] + Dict[BuzzInput];
                 }
-                else if (input % fizzValue == 0)
+                else if (input % fizzInput == 0)
                 {
-                    return ConfigurationManager.AppSettings["fizzValue"];
+                    return Dict[fizzInput];
                 }
-                else if (input % BuzzValue == 0)
+                else if (input % BuzzInput == 0)
                 {
-                    return ConfigurationManager.AppSettings["BuzzValue"];
+                    return Dict[BuzzInput];
                 }
                 else
                     return input.ToString();
