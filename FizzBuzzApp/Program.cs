@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,9 +12,9 @@ namespace FizzBuzzApp
         {
             try
             {
-                Console.WriteLine("----------------------------------------------------------");
+                Console.WriteLine("**********************************************************");
                 Console.WriteLine("------------------------- FizzBuzz------------------------");
-                Console.WriteLine("----------------------------------------------------------");
+                Console.WriteLine("**********************************************************");
 
                 DoFizzBuzz fizzBuzz = new DoFizzBuzz();
                 fizzBuzz.RunFizzBuzz();
